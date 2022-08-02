@@ -26,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/list', [TaskController::class, 'list']);
     Route::post('/register', [TaskController::class, 'register']);
     Route::get('/detail/{task_id}', [TaskController::class, 'detail'])->whereNumber('task_id')->name('detail');
+    Route::get('/edit/{task_id}', [TaskController::class, 'edit'])->whereNumber('task_id')->name('edit');
+    Route::put('/edit/{task_id}', [TaskController::class, 'logout']);
+    Route::delete('/delete/{task_id}', [TaskController::class, 'delete'])->whereNumber('task_id')->name('delete');
   });
   //
   Route::get('/logout', [AuthController::class, 'logout']);
