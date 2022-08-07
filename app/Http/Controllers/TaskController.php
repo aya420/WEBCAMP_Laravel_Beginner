@@ -272,7 +272,7 @@ var_dump($sql);
                 ->header('Content-Disposition', 'attachment; filename="' . $download_filename . '"');
      }
     
-        /**
+    /**
      * 一覧用の Illuminate\Database\Eloquent\Builder インスタンスの取得
      */
     protected function getListBuilder()
