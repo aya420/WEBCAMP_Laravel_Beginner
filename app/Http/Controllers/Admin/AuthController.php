@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginPostRequest;
+use App\Http\Requests\AdminLoginPostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -17,10 +17,10 @@ class AuthController extends Controller
      */
      public function index()
      {
-         return view('index');
+         return view('admin.top');
      }
      
-     /**
+    /**
      * ログイン処理
      * 
      */
@@ -31,19 +31,20 @@ class AuthController extends Controller
         // データの取得
         $datum = $request->validated();
         //var_dump($datum); exit;
-        
+
         // 認証
         if (Auth::guard('admin')->attempt($datum) === false) {
             return back()
-                        ->withInput() // 入力値の保持
-                        ->withErrors(['auth' => 'ログインIDかパスワードに誤りがあります。',]) // エラーメッセージの出力
-                        ;
+                   ->withInput() // 入力値の保持
+                   ->withErrors(['auth' => 'ログインIDかパスワードに誤りがあります。',]) // エラーメッセージの出力
+                   ;
         }
-        
+
         //
         $request->session()->regenerate();
         return redirect()->intended('/admin/top');
     }
+
     
     /*
      * ログアウト処理
@@ -51,9 +52,9 @@ class AuthController extends Controller
      */
     Public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->regenerateToken(); // CSRFトークンの再生成
         $request->session()->regenerate(); //セッションIDの再生成
-        return redirect(route('front.indx'));
+        return redirect(route('admin.index'));
     }
 }
