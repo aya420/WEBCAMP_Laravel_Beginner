@@ -50,7 +50,7 @@ class AuthController extends Controller
      * ログアウト処理
      * 
      */
-    Public function logout(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
         $request->session()->regenerateToken(); // CSRFトークンの再生成
