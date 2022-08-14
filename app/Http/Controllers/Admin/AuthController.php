@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
@@ -11,22 +10,22 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /**
-     * トップページ　を表示する
+     * トップページ を表示する
      * 
      * @return \Illuminate\View\View
      */
-     public function index()
-     {
-         return view('admin.top');
-     }
-     
+    public function index()
+    {
+        return view('admin.index');
+    }
+
     /**
      * ログイン処理
      * 
      */
     public function login(AdminLoginPostRequest $request)
     {
-        // validate済
+        // validat済
 
         // データの取得
         $datum = $request->validated();
@@ -45,16 +44,15 @@ class AuthController extends Controller
         return redirect()->intended('/admin/top');
     }
 
-    
-    /*
+    /**
      * ログアウト処理
      * 
      */
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        $request->session()->regenerateToken(); // CSRFトークンの再生成
-        $request->session()->regenerate(); //セッションIDの再生成
+        $request->session()->regenerateToken();  // CSRFトークンの再生成
+        $request->session()->regenerate();  // セッションIDの再生成
         return redirect(route('admin.index'));
     }
 }

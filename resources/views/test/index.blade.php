@@ -1,13 +1,14 @@
-@extends('layout')
+@extends('test.layout')
 
 {{-- メインコンテンツ --}}
 @section('contets')
+
         @if ($errors->any())
-           <div>
+            <div>
             @foreach ($errors->all() as $error)
                 {{ $error }}<br>
             @endforeach
-           </div>
+            </div>
         @endif
         <form action="/test/input" method="post">
             @csrf

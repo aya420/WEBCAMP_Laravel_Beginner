@@ -7,10 +7,10 @@
 @section('contets')
         <h1>タスクの登録</h1>
             @if (session('front.task_register_success') == true)
-                タスクを登録しました!!<br>
+                タスクを登録しました！！<br>
             @endif
             @if (session('front.task_delete_success') == true)
-                タスクを削除しました!!<br>
+                タスクを削除しました！！<br>
             @endif
             @if (session('front.task_completed_success') == true)
                 タスクを完了にしました！！<br>
@@ -31,7 +31,7 @@
                 期限:<input name="period" type="date" value="{{ old('period') }}"><br>
                 タスク詳細:<textarea name="detail">{{ old('detail') }}</textarea><br>
                 重要度:<label><input type="radio" name="priority" value="1" @if (old('priority') == 1) checked @endif>低い</label> / 
-                    <label><input type="radio" name="priority" value="2" @if (old('priority') == 2) checked @endif>普通</label> / 
+                    <label><input type="radio" name="priority" value="2" @if (old('priority', 2) == 2) checked @endif>普通</label> / 
                     <label><input type="radio" name="priority" value="3" @if (old('priority') == 3) checked @endif>高い</label><br>
                 <button>タスクを登録する</button>
             </form>
@@ -50,29 +50,28 @@
             <td>{{ $task->getPriorityString() }}
             <td><a href="{{ route('detail', ['task_id' => $task->id]) }}">詳細閲覧</a>
             <td><a href="{{ route('edit', ['task_id' => $task->id]) }}">編集</a>
-            <td><form action="{{ route('complete', ['task_id' => $task->id]) }}" method="post"> @csrf <button onclick='return confirm("このタスクを「完了」にします。よろしいですか？");' >完了</button></form>
-
+            <td><form action="{{ route('complete', ['task_id' => $task->id]) }}" method="post"> @csrf <button onclick='return confirm("このタスクを「完了」にします。よろしいですか？");' >完了</button></form></a>
 @endforeach
         </table>
         <!-- ページネーション -->
-        {{--{{ $list->links() }} --}}
+        {{-- {{ $list->links() }} --}}
         現在 {{ $list->currentPage() }} ページ目<br>
         @if ($list->onFirstPage() === false)
-        <a href="/task/list">最初のページ</a>
+            <a href="/task/list">最初のページ</a>
         @else
-          最初のベージ
+            最初のページ
         @endif
         /
         @if ($list->previousPageUrl() !== null)
-          <a href="{{ $list->previousPageUrl() }}">前に戻る</a>
+            <a href="{{ $list->previousPageUrl() }}">前に戻る</a>
         @else
-          前に戻る
+            前に戻る
         @endif
         /
         @if ($list->nextPageUrl() !== null)
-          <a href="{{ $list->nextPageUrl() }}">次に進む</a>
+            <a href="{{ $list->nextPageUrl() }}">次に進む</a>
         @else
-          次に進む
+            次に進む
         @endif
         <br>
         <hr>
