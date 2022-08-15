@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 /* 名前空間の指定 */
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\CompletedTaskModel as CompletedTaskModel;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CompletedTask as CompletedTaskModel;
 
 class CompletedTaskController extends Controller
 {
@@ -20,8 +21,8 @@ class CompletedTaskController extends Controller
         $list = CompletedTaskModel::where('user_id', Auth::id())
                                    ->orderBy('priority', 'DESC')
                                    ->orderBy('period')
-                                   ->orderBy('created-at')
+                                   ->orderBy('updated_at')
                                    ->get();
-        return view('completed_list');
+        return view('task.completed_list', ['list' => $list]);
     }
 }

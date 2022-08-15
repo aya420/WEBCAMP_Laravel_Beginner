@@ -1,12 +1,21 @@
-<h1>完了タスク一覧</h1>
+@extends('layout')
 
+{{-- タイトル --}}
+@section('title')(詳細画面)@endsection
+
+@foreach ($list as $task)
+        <tr>
+            <td>{{ $task->name }}
+            <td>{{ $task->period }}
+            <td>{{ $task->getPriorityString() }}
+            <td>{{ $task->updated_at }}
 @endforeach
         </table>
         <!-- ページネーション -->
         {{-- {{ $list->links() }} --}}
         現在 {{ $list->currentPage() }} ページ目<br>
         @if ($list->onFirstPage() === false)
-            <a href="/task/list">最初のページ</a>
+            <a href="/completed_tasks/list">最初のページ</a>
         @else
             最初のページ
         @endif
