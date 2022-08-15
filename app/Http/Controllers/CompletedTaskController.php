@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 /* 名前空間の指定 */
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CompletedTaskModel as CompletedTaskModel;
 
 class CompletedTaskController extends Controller
 {
