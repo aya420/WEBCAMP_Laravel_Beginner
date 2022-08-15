@@ -8,6 +8,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\CompletedTaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/delete/{task_id}', [TaskController::class, 'delete'])->whereNumber('task_id')->name('delete');
         Route::post('/complete/{task_id}', [TaskController::class, 'complete'])->whereNumber('task_id')->name('complete');
         Route::get('/csv/download', [TaskController::class, 'csvDownload']);
+        Route::get('/completed_tasks/list', [CompletedTaskController::class,'list']);
     });
     //
     Route::get('/logout', [AuthController::class, 'logout']);
@@ -50,6 +52,8 @@ Route::prefix('/admin')->group(function () {
     });
     Route::get('/logout', [AdminAuthController::class, 'logout']);
 });
+
+
 
 
 
